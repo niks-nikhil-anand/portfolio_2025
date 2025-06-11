@@ -15,7 +15,7 @@ interface Particle {
 
 const ParticlesBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
   const timeRef = useRef<number>(0);
 

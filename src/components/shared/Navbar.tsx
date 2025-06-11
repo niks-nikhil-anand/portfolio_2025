@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Switch } from '@/components/ui/switch';
 import { useTheme } from 'next-themes';
 import { 
   BsMoonStars, 
@@ -11,16 +10,14 @@ import {
   BsLinkedin 
 } from 'react-icons/bs';
 import { 
-  BiCoffee, 
   BiUser, 
   BiBriefcase, 
   BiPackage 
 } from 'react-icons/bi';
 import { HiOutlineMail } from 'react-icons/hi';
 
-interface NavbarProps {}
-
-const Navbar: React.FC<NavbarProps> = () => {
+// Remove the empty interface and use React.FC without props type
+const Navbar: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
