@@ -3,18 +3,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const marqueeItems = [
-  'revolutionary products',
-  'next-gen solutions',
-  'product innovation',
-  'market disruption',
-  'product visionary',
-  'game-changing products',
-  'WAVEFORM',
-  'product excellence',
-  'cutting edge products',
-  'future products',
-  'breakthrough solutions',
-  'product mastery'
+  'Full-Stack Developer',
+  'App Developer',
+  'Gen AI Developer',
+  'Frontend Developer',
+  'Backend Developer',
+  'Tech Freelancer',
 ];
 
 const TechMarquee = () => {
