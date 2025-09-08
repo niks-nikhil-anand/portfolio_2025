@@ -1,20 +1,12 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from 'next-themes';
-import { 
-  BsMoonStars, 
-  BsSun, 
-  BsInstagram, 
-  BsTwitter, 
-  BsLinkedin 
-} from 'react-icons/bs';
-import { 
-  BiUser, 
-  BiBriefcase, 
-  BiPackage 
-} from 'react-icons/bi';
-import { HiOutlineMail } from 'react-icons/hi';
+"use client";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
+import { BsMoonStars, BsSun, BsInstagram, BsTwitter } from "react-icons/bs";
+import { BiUser, BiBriefcase, BiPackage } from "react-icons/bi";
+import { HiOutlineMail } from "react-icons/hi";
+import Link from "next/link";
+import { FaGithub } from "react-icons/fa6";
 
 // Remove the empty interface and use React.FC without props type
 const Navbar: React.FC = () => {
@@ -22,10 +14,10 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
 
-  const isDarkMode = theme === 'dark';
+  const isDarkMode = theme === "dark";
 
   const toggleDarkMode = (): void => {
-    setTheme(isDarkMode ? 'light' : 'dark');
+    setTheme(isDarkMode ? "light" : "dark");
   };
 
   useEffect(() => {
@@ -38,8 +30,8 @@ const Navbar: React.FC = () => {
       setIsScrolled(scrollTop > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Don't render until mounted to avoid hydration mismatch
@@ -49,40 +41,37 @@ const Navbar: React.FC = () => {
 
   // Dynamic navbar classes with proper background colors
   const navbarClasses: string = `fixed top-0 left-0 right-0 w-full px-4 sm:px-6 py-3 transition-all duration-300 z-50 border-b ${
-    isScrolled 
-      ? `${isDarkMode 
-          ? 'bg-black/95 backdrop-blur-md border-gray-800/50 shadow-lg shadow-black/10' 
-          : 'bg-white/95 backdrop-blur-md border-gray-200/50 shadow-lg shadow-gray-900/10'
-        }` 
-      : 'bg-transparent border-transparent'
-  }`;
-
-  const socialLinkClasses: string = `p-2.5 rounded-lg transition-all duration-200 hover:scale-110 hover:bg-accent ${
-    isDarkMode ? 'text-white' : 'text-black'
+    isScrolled
+      ? `${
+          isDarkMode
+            ? "bg-black/95 backdrop-blur-md border-gray-800/50 shadow-lg shadow-black/10"
+            : "bg-white/95 backdrop-blur-md border-gray-200/50 shadow-lg shadow-gray-900/10"
+        }`
+      : "bg-transparent border-transparent"
   }`;
 
   const navLinkClasses: string = `flex items-center space-x-2 px-3 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 hover:bg-accent ${
-    isDarkMode ? 'text-white' : 'text-black'
+    isDarkMode ? "text-white" : "text-black"
   }`;
 
   return (
     <nav className={navbarClasses}>
       <div className="mx-auto flex items-center justify-between">
-        
         {/* Left Side */}
         <div className="flex items-center space-x-4">
           {/* Enhanced Dark Mode Toggle with Framer Motion */}
-          <motion.div 
+          <motion.div
             className="relative flex items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div 
+            <div
               className={`
                 relative w-16 h-8 rounded-full cursor-pointer transition-all duration-300 ease-in-out
-                ${isDarkMode 
-                  ? 'bg-black shadow-lg shadow-black/25 border border-gray-700' 
-                  : 'bg-white shadow-lg shadow-gray-300/50 border border-gray-200'
+                ${
+                  isDarkMode
+                    ? "bg-black shadow-lg shadow-black/25 border border-gray-700"
+                    : "bg-white shadow-lg shadow-gray-300/50 border border-gray-200"
                 }
               `}
               onClick={toggleDarkMode}
@@ -91,9 +80,10 @@ const Navbar: React.FC = () => {
               <motion.div
                 className={`
                   absolute top-0.5 w-6 h-6 rounded-full shadow-md flex items-center justify-center
-                  ${isDarkMode 
-                    ? 'bg-white shadow-black/30' 
-                    : 'bg-black shadow-gray-400/50'
+                  ${
+                    isDarkMode
+                      ? "bg-white shadow-black/30"
+                      : "bg-black shadow-gray-400/50"
                   }
                 `}
                 animate={{
@@ -102,7 +92,7 @@ const Navbar: React.FC = () => {
                 transition={{
                   type: "spring",
                   stiffness: 500,
-                  damping: 30
+                  damping: 30,
                 }}
               >
                 <AnimatePresence mode="wait">
@@ -139,7 +129,11 @@ const Navbar: React.FC = () => {
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <BsSun className={`w-4 h-4 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`} />
+                  <BsSun
+                    className={`w-4 h-4 ${
+                      isDarkMode ? "text-gray-500" : "text-gray-400"
+                    }`}
+                  />
                 </motion.div>
                 <motion.div
                   animate={{
@@ -148,72 +142,45 @@ const Navbar: React.FC = () => {
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <BsMoonStars className={`w-3 h-3 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+                  <BsMoonStars
+                    className={`w-3 h-3 ${
+                      isDarkMode ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  />
                 </motion.div>
               </div>
             </div>
           </motion.div>
 
           {/* Social Media Icons */}
-          <div className="hidden sm:flex items-center space-x-1">
-            <motion.a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={socialLinkClasses}
-              aria-label="Instagram"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          <div className="hidden sm:flex items-center space-x-1 gap-5">
+            <Link href={"https://www.linkedin.com/in/nikhilanand86/"}>
               <BsInstagram className="w-4 h-4" />
-            </motion.a>
-            
-            <motion.a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={socialLinkClasses}
-              aria-label="Twitter"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            </Link>
+            <Link href={"https://x.com/niks_developer"}>
               <BsTwitter className="w-4 h-4" />
-            </motion.a>
-            
-            <motion.a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={socialLinkClasses}
-              aria-label="LinkedIn"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <BsLinkedin className="w-4 h-4" />
-            </motion.a>
+            </Link>
+            <Link href={"https://github.com/niks-nikhil-anand"}>
+              <FaGithub className="w-4 h-4" />
+            </Link>
           </div>
         </div>
 
         {/* Center - Logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <motion.a 
-            href="#home" 
+          <motion.a
+            href="#home"
             className="flex items-center space-x-2 group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <motion.div 
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 bg-primary text-primary-foreground group-hover:bg-primary/90 shadow-lg`}
+            <motion.div
+              className={`w-16 h-7 rounded-3xl  flex items-center justify-center font-bold text-lg transition-all duration-300 bg-primary text-primary-foreground group-hover:bg-primary/90 shadow-lg`}
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.6 }}
             >
-              L
+              Niks
             </motion.div>
-            <span className={`hidden sm:block font-bold text-xl transition-all duration-300 ${
-              isDarkMode ? 'text-white' : 'text-black'
-            } group-hover:text-primary`}>
-              LOGO
-            </span>
           </motion.a>
         </div>
 
@@ -267,9 +234,16 @@ const Navbar: React.FC = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <div className={`w-5 h-5 ${isDarkMode ? 'text-white' : 'text-black'}`}>
+            <div
+              className={`w-5 h-5 ${isDarkMode ? "text-white" : "text-black"}`}
+            >
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </div>
           </motion.button>

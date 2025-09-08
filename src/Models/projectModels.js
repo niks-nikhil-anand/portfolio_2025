@@ -12,7 +12,6 @@ const projectSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-
     githubLink: {
       type: String,
       trim: true,

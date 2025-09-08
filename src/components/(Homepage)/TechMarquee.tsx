@@ -1,25 +1,24 @@
 "use client";
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
 const marqueeItems = [
-  'Full-Stack Developer',
-  'App Developer',
-  'Gen AI Developer',
-  'Frontend Developer',
-  'Backend Developer',
-  'Tech Freelancer',
+  "Full-Stack Developer",
+  "App Developer",
+  "Gen AI Developer",
+  "Frontend Developer",
+  "Backend Developer",
+  "Tech Freelancer",
 ];
 
 const TechMarquee = () => {
   return (
     <div className="relative w-full h-64 overflow-hidden flex items-center transition-colors duration-300 bg-white dark:bg-background">
-      
       {/* Single diagonal band */}
       <div className="absolute inset-0">
-        <div 
+        <div
           className="absolute w-full h-32 transform -skew-y-2 origin-top-left z-0 transition-colors duration-300 bg-blue-500 dark:bg-red-500"
-          style={{ top: '30%' }}
+          style={{ top: "30%" }}
         />
       </div>
 
@@ -48,10 +47,6 @@ const TechMarquee = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* Gradient overlays for smooth edges */}
-      <div className="absolute left-0 top-0 w-32 h-full z-20 transition-colors duration-300 bg-gradient-to-r from-white to-transparent dark:from-black" />
-      <div className="absolute right-0 top-0 w-32 h-full z-20 transition-colors duration-300 bg-gradient-to-l from-white to-transparent dark:from-black" />
     </div>
   );
 };

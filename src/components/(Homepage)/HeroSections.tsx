@@ -164,8 +164,8 @@ const HeroSection: React.FC = () => {
         <div className="mx-auto space-y-6 sm:space-y-8 lg:space-y-12">
           {/* Main Heading */}
           <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-none flex gap-4">
-            <span className="block text-foreground">Nikhil</span>
-            <span className="block text-foreground">Anand</span>
+            <span className="block text-foreground Syne">Nikhil</span>
+            <span className="block text-foreground Syne">Anand</span>
           </h1>
 
           {/* Subtitle */}
