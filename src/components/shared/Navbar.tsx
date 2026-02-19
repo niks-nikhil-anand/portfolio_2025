@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
   }
 
   // Dynamic navbar classes with proper background colors
-  const navbarClasses: string = `fixed top-0 left-0 right-0 w-full px-4 sm:px-6 py-3 transition-all duration-300 z-50 border-b ${isScrolled
+  const navbarClasses: string = `top-0 left-0 right-0 w-full px-4 sm:px-6 py-3 transition-all duration-300 z-50 border-b ${isScrolled
     ? `${isDarkMode
       ? "bg-black/95 backdrop-blur-md border-gray-800/50 shadow-lg shadow-black/10"
       : "bg-white/95 backdrop-blur-md border-gray-200/50 shadow-lg shadow-gray-900/10"
