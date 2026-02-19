@@ -2,20 +2,27 @@
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { Card } from "@/components/ui/card";
 
-const skills = [
-  "Next JS",
-  "React",
-  "TypeScript",
-  "Node JS",
-  "Express JS",
-  "MongoDB",
-  "SQL",
-  "Prisma",
-  "LangChain",
-  "AWS",
-  "Tailwind CSS",
-  "Vercel",
-  "Git",
+const skillCategories = [
+  {
+    category: "Languages",
+    skills: ["JavaScript", "TypeScript"],
+  },
+  {
+    category: "Frontend",
+    skills: ["React.js", "Next.js", "Tailwind CSS", "HTML", "CSS"],
+  },
+  {
+    category: "Backend & DevOps",
+    skills: ["Node.js", "Express.js", "Docker", "AWS (S3, ECR, ECS)", "JWT", "REST APIs"],
+  },
+  {
+    category: "Databases & ORM",
+    skills: ["MongoDB", "PostgreSQL", "Prisma"],
+  },
+  {
+    category: "Tools & Practices",
+    skills: ["Git", "Postman", "Shadcn", "VS Code"],
+  },
 ];
 
 const contacts = [
@@ -28,16 +35,23 @@ const SkillsAndContact = () => {
   return (
     <div className="container mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* Skills Section */}
-      <Card className="p-4 rounded-xl bg-muted">
-        <h2 className="text-xl font-bold mb-2">Skills</h2>
-        <div className="flex flex-wrap gap-2">
-          {skills.map((name) => (
-            <span
-              key={name}
-              className="px-3 py-1.5 bg-background text-foreground rounded-lg shadow-sm text-sm font-medium"
-            >
-              {name}
-            </span>
+      <Card className="p-4 rounded-xl bg-muted h-full">
+        <h2 className="text-xl font-bold mb-4">Technical Skills</h2>
+        <div className="space-y-4">
+          {skillCategories.map(({ category, skills }) => (
+            <div key={category}>
+              <h3 className="font-semibold text-foreground text-sm mb-2">{category}</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((name) => (
+                  <span
+                    key={name}
+                    className="px-3 py-1.5 bg-background text-foreground rounded-lg shadow-sm text-xs font-medium border border-border/50"
+                  >
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </Card>
