@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsGithub, BsEye, BsPerson, BsBriefcase, BsBox } from "react-icons/bs";
 import Image from "next/image";
+import { PERSONAL_PROJECTS, FREELANCE_PROJECTS } from "@/constants";
 
 // Types
 interface BaseProject {
@@ -39,94 +40,10 @@ type Project = PersonalProject | FreelanceProject | Product;
 
 type TabType = "personal" | "freelance" | "products";
 
-// Constants
-const PERSONAL_PROJECTS: PersonalProject[] = [
-  {
-    id: 1,
-    type: "personal",
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop",
-    title: "AI Task Manager",
-    subtitle:
-      "Smart productivity app with AI-powered task prioritization and intelligent scheduling",
-    technologies: ["React", "Node.js", "OpenAI API", "MongoDB"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: 2,
-    type: "personal",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop",
-    title: "Data Visualization Tool",
-    subtitle:
-      "Interactive dashboard for complex data analysis with real-time charts",
-    technologies: ["D3.js", "Python", "Flask", "PostgreSQL"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: 3,
-    type: "personal",
-    image:
-      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop",
-    title: "Crypto Portfolio Tracker",
-    subtitle:
-      "Real-time cryptocurrency portfolio management with advanced analytics",
-    technologies: ["Vue.js", "Express", "WebSocket", "Redis"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-];
-
-const FREELANCE_PROJECTS: FreelanceProject[] = [
-  {
-    id: 4,
-    type: "freelance",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
-    title: "E-commerce Platform",
-    subtitle:
-      "Full-stack online store for fashion brand with payment integration",
-    technologies: ["Next.js", "Stripe", "PostgreSQL", "Tailwind"],
-    client: "Fashion Forward Co.",
-    duration: "3 months",
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: 5,
-    type: "freelance",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop",
-    title: "Restaurant Management",
-    subtitle:
-      "Complete POS system with inventory tracking and staff management",
-    technologies: ["React Native", "Firebase", "Square API", "TypeScript"],
-    client: "Bistro Central",
-    duration: "2 months",
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: 6,
-    type: "freelance",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop",
-    title: "Real Estate CRM",
-    subtitle:
-      "Customer relationship management for property sales and lead tracking",
-    technologies: ["Angular", "Spring Boot", "MySQL", "Docker"],
-    client: "Prime Properties",
-    duration: "4 months",
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-];
-
+// Hardcoded PRODUCTS remains internal as it was not moved to constants
 const PRODUCTS: Product[] = [
   {
-    id: 7,
+    id: 10, // Updated ID to avoid conflict
     type: "product",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop",
@@ -140,7 +57,7 @@ const PRODUCTS: Product[] = [
     demo: "https://demo.com",
   },
   {
-    id: 8,
+    id: 11,
     type: "product",
     image:
       "https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400&h=250&fit=crop",
@@ -154,7 +71,7 @@ const PRODUCTS: Product[] = [
     demo: "https://demo.com",
   },
   {
-    id: 9,
+    id: 12,
     type: "product",
     image:
       "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=250&fit=crop",
@@ -167,6 +84,7 @@ const PRODUCTS: Product[] = [
     demo: "https://demo.com",
   },
 ];
+
 
 const TABS = [
   { id: "personal" as TabType, label: "Personal Projects", icon: BsPerson },
@@ -305,13 +223,13 @@ const ProjectsShowcase: React.FC = () => {
   const getCurrentProjects = (): Project[] => {
     switch (activeTab) {
       case "personal":
-        return PERSONAL_PROJECTS;
+        return PERSONAL_PROJECTS as Project[];
       case "freelance":
-        return FREELANCE_PROJECTS;
+        return FREELANCE_PROJECTS as Project[];
       case "products":
-        return PRODUCTS;
+        return PRODUCTS as Project[];
       default:
-        return PERSONAL_PROJECTS;
+        return PERSONAL_PROJECTS as Project[];
     }
   };
 
@@ -335,25 +253,26 @@ const ProjectsShowcase: React.FC = () => {
       <div className="container mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 text-foreground">My Work</h1>
-          <p className="text-lg text-muted-foreground">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-foreground font-heading">
+            My Work
+          </h1>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl">
             Explore my personal projects, freelance work, and products
           </p>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex space-x-1 mb-8 bg-muted/50 backdrop-blur-sm rounded-xl p-1">
+        <div className="flex space-x-1 mb-8 bg-muted/50 backdrop-blur-sm rounded-xl p-1 overflow-x-auto scrollbar-hide">
           {TABS.map(({ id, label, icon: Icon }) => (
             <motion.button
               key={id}
               variants={tabVariants}
               animate={activeTab === id ? "active" : "inactive"}
               onClick={() => setActiveTab(id)}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-                activeTab === id
-                  ? "bg-background text-foreground shadow-lg border border-border"
-                  : "text-muted-foreground hover:text-foreground hover:bg-background/50"
-              }`}
+              className={`flex items-center space-x-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0 ${activeTab === id
+                ? "bg-background text-foreground shadow-sm sm:shadow-lg border border-border"
+                : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
