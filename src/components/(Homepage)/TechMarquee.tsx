@@ -13,39 +13,65 @@ const marqueeItems = [
 
 const TechMarquee = () => {
   return (
-    <div className="relative w-full h-64 overflow-hidden flex items-center transition-colors duration-300 bg-white dark:bg-background">
-      {/* Single diagonal band */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute w-full h-32 transform -skew-y-2 origin-top-left z-0 transition-colors duration-300 bg-blue-500 dark:bg-red-500"
-          style={{ top: "30%" }}
-        />
+    <div className="relative w-full h-[500px] overflow-hidden flex items-center justify-center bg-white dark:bg-background">
+      {/* First Marquee - Blue (Crossing downwards) */}
+      <div className="absolute w-full transform -rotate-6 z-10">
+        <div className="relative w-full flex items-center h-32 bg-blue-500 dark:bg-blue-600">
+          <div className="relative z-10 w-full overflow-hidden">
+            <motion.div
+              className="flex whitespace-nowrap py-4"
+              animate={{ x: [0, -2000] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 25,
+                  ease: "linear",
+                },
+              }}
+            >
+              {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+                <span
+                  key={index}
+                  className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-white transition-colors duration-300"
+                >
+                  {item}
+                  <span className="mx-4 opacity-50">•</span>
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </div>
       </div>
 
-      {/* Marquee content */}
-      <div className="relative z-10 w-full overflow-hidden">
-        <motion.div
-          className="flex whitespace-nowrap"
-          animate={{ x: [0, -2000] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              duration: 25,
-              ease: "linear",
-            },
-          }}
-        >
-          {[...marqueeItems, ...marqueeItems].map((item, index) => (
-            <span
-              key={index}
-              className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-black dark:text-white shadow-md shadow-white dark:shadow-black transition-colors duration-300"
+      {/* Second Marquee - Red (Crossing upwards) */}
+      <div className="absolute w-full transform rotate-6 z-20">
+        <div className="relative w-full flex items-center h-32 bg-red-500 dark:bg-red-600 border-y border-white/20">
+          <div className="relative z-10 w-full overflow-hidden">
+            <motion.div
+              className="flex whitespace-nowrap py-4"
+              animate={{ x: [-2000, 0] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 25,
+                  ease: "linear",
+                },
+              }}
             >
-              {item}
-              <span className="mx-4">•</span>
-            </span>
-          ))}
-        </motion.div>
+              {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+                <span
+                  key={index}
+                  className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-white transition-colors duration-300"
+                >
+                  {item}
+                  <span className="mx-4 opacity-50">•</span>
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );
