@@ -22,7 +22,7 @@ const TechMarquee = () => {
   return (
     <div className="relative w-full h-[300px] md:h-[400px] overflow-hidden flex items-center justify-center bg-white dark:bg-background">
       {/* First Marquee - Blue (Crossing downwards) */}
-      <div className="absolute w-full transform -rotate-3 md:-rotate-6 z-10">
+      <div className="absolute w-[120%] -left-[10%] transform -rotate-12 md:-rotate-6 z-10">
         <div className="relative w-full flex items-center h-20 md:h-28 bg-blue-500 dark:bg-blue-600">
           <div className="relative z-10 w-full overflow-hidden">
             <motion.div
@@ -52,7 +52,7 @@ const TechMarquee = () => {
       </div>
 
       {/* Second Marquee - Red (Crossing upwards) */}
-      <div className="absolute w-full transform rotate-3 md:rotate-6 z-20">
+      <div className="absolute w-[120%] -left-[10%] transform rotate-12 md:rotate-6 z-20">
         <div className="relative w-full flex items-center h-20 md:h-28 bg-red-500 dark:bg-red-600 border-y border-white/20">
           <div className="relative z-10 w-full overflow-hidden">
             <motion.div
