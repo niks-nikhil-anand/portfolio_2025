@@ -14,7 +14,7 @@ const page = () => {
       <SkillsAndContact/>
       <ProjectsShowcase/>
       {/* <ProdcutShowCase/> */}
-      <BlogShowcase/>
+      {/* <BlogShowcase/> */}
       <Newsletter/>
       <TechMarquee/>
     </div>
