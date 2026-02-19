@@ -40,12 +40,9 @@ const Navbar: React.FC = () => {
   }
 
   // Dynamic navbar classes with proper background colors
-  const navbarClasses: string = `top-0 left-0 right-0 w-full px-4 sm:px-6 py-3 transition-all duration-300 z-50 border-b ${isScrolled
-    ? `${isDarkMode
-      ? "bg-black/95 backdrop-blur-md border-gray-800/50 shadow-lg shadow-black/10"
-      : "bg-white/95 backdrop-blur-md border-gray-200/50 shadow-lg shadow-gray-900/10"
-    }`
-    : "bg-transparent border-transparent"
+  const navbarClasses: string = `relative w-[92%] max-w-5xl mx-auto mt-4 sm:mt-6 mb-4 px-5 sm:px-8 py-3 sm:py-4 transition-all duration-500 z-50 rounded-2xl sm:rounded-full border backdrop-blur-xl ${isDarkMode
+    ? "bg-black/40 border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
+    : "bg-white/60 border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
     }`;
 
   const navLinkClasses: string = `flex items-center space-x-2 px-3 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 hover:bg-accent ${isDarkMode ? "text-white" : "text-black"
@@ -143,52 +140,55 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={navbarClasses}>
-      <div className="mx-auto flex items-center justify-between">
-        {/* Left Side */}
-        <div className="flex items-center space-x-4">
-          {/* Enhanced Dark Mode Toggle with Framer Motion */}
-          <div className="md:hidden">
+      <div className="mx-auto flex items-center justify-between w-full relative">
+
+        {/* Left Side (Theme Toggle on Mobile, Social Icons on Desktop) */}
+        <div className="flex items-center gap-4">
+          {/* Mobile Theme Toggle */}
+          <div className="sm:hidden">
             {renderThemeToggle()}
           </div>
 
-          {/* Social Media Icons */}
-          <div className="hidden sm:flex items-center space-x-1 gap-5">
-            <Link href={"https://www.linkedin.com/in/nikhilanand86/"}>
-              <BsInstagram className="w-4 h-4" />
+          {/* Desktop Social Icons */}
+          <div className="hidden sm:flex items-center gap-3">
+            <Link href={"https://www.linkedin.com/in/nikhilanand86/"} className="p-2 rounded-full hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110">
+              <BsInstagram className="w-5 h-5" />
             </Link>
-            <Link href={"https://x.com/niks_developer"}>
-              <BsTwitter className="w-4 h-4" />
+            <Link href={"https://x.com/niks_developer"} className="p-2 rounded-full hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110">
+              <BsTwitter className="w-5 h-5" />
             </Link>
-            <Link href={"https://github.com/niks-nikhil-anand"}>
-              <FaGithub className="w-4 h-4" />
+            <Link href={"https://github.com/niks-nikhil-anand"} className="p-2 rounded-full hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110">
+              <FaGithub className="w-5 h-5" />
             </Link>
           </div>
         </div>
 
-        {/* Logo - Centered on Desktop, Right on Mobile */}
-        <div className="absolute right-4 md:left-1/2 md:right-auto md:transform md:-translate-x-1/2">
+        {/* Center/Right - Logo */}
+        <div className="absolute right-0 sm:left-1/2 sm:right-auto sm:transform sm:-translate-x-1/2 flex items-center">
           <motion.a
             href="#home"
-            className="flex items-center space-x-2 group"
+            className="flex items-center group relative"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
+            {/* Soft Glow behind logo on hover */}
+            <div className="absolute inset-0 bg-primary/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
             <motion.div
-              className={`w-16 h-7 rounded-3xl  flex items-center justify-center font-bold text-lg transition-all duration-300 bg-primary text-primary-foreground group-hover:bg-primary/90 shadow-lg`}
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
+              className="relative px-3 sm:px-4 py-1.5 rounded-full flex items-center justify-center font-bold text-base sm:text-xl md:text-2xl transition-all duration-300 border border-transparent group-hover:border-primary/20 bg-transparent text-center whitespace-nowrap sm:whitespace-normal"
             >
-              Niks
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/50 font-heading tracking-tight drop-shadow-sm">
+                Cosmos Within Us ✨
+              </span>
             </motion.div>
           </motion.a>
         </div>
 
-        {/* Right Side */}
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:flex items-center space-x-2">
-            {renderThemeToggle()}
-          </div>
+        {/* Right Side - Theme Toggle (Desktop Only) */}
+        <div className="hidden sm:flex items-center">
+          {renderThemeToggle()}
         </div>
+
       </div>
     </nav>
   );
