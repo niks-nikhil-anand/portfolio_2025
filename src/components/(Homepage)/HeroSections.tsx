@@ -163,13 +163,13 @@ const HeroSection: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center justify-center w-full py-20 px-4 sm:px-6 lg:px-8 text-center">
         <div className="mx-auto space-y-6 sm:space-y-8 lg:space-y-12">
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-none flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-none flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-6">
             <span className="block text-foreground font-heading">Nikhil</span>
             <span className="block text-foreground font-heading">Anand</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium text-muted-foreground">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium text-muted-foreground whitespace-nowrap">
             Full Stack Developer
           </p>
 
