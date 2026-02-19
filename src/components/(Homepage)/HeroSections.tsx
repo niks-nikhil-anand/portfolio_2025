@@ -81,7 +81,7 @@ const ParticlesBackground: React.FC = () => {
 
     const animate = (): void => {
       timeRef.current += 0.016; // Roughly 60fps time increment
-      
+
       const colors = getThemeColors();
       ctx.fillStyle = colors.background;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -95,7 +95,7 @@ const ParticlesBackground: React.FC = () => {
         particle.y =
           particle.originalY +
           Math.sin(timeRef.current * particle.waveSpeed + particle.waveOffset) *
-            waveAmplitude;
+          waveAmplitude;
 
         // Update original Y position slowly
         particle.originalY += particle.vy;
@@ -125,7 +125,7 @@ const ParticlesBackground: React.FC = () => {
     const observer = new MutationObserver(() => {
       // Animation will pick up theme changes automatically
     });
-    
+
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
@@ -153,19 +153,19 @@ const ParticlesBackground: React.FC = () => {
 
 const HeroSection: React.FC = () => {
   return (
-    <div className="relative max-h-[65vh] overflow-hidden bg-background text-foreground transition-colors duration-300 backdrop-blur-md border-border">
+    <div className="relative min-h-[70vh] sm:h-[75vh] md:h-[80vh] flex items-center overflow-hidden bg-background text-foreground transition-colors duration-300 backdrop-blur-md border-border">
       {/* Particles Background */}
       <ParticlesBackground />
 
 
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-[65vh] px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full py-20 px-4 sm:px-6 lg:px-8 text-center">
         <div className="mx-auto space-y-6 sm:space-y-8 lg:space-y-12">
           {/* Main Heading */}
-          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-none flex gap-4">
-            <span className="block text-foreground Syne">Nikhil</span>
-            <span className="block text-foreground Syne">Anand</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight leading-none flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
+            <span className="block text-foreground font-heading">Nikhil</span>
+            <span className="block text-foreground font-heading">Anand</span>
           </h1>
 
           {/* Subtitle */}
@@ -175,11 +175,11 @@ const HeroSection: React.FC = () => {
 
           {/* Optional CTA Button */}
           <div className="pt-4">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-             Hire me
+              Hire me
             </Button>
           </div>
         </div>
