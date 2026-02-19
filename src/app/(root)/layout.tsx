@@ -3,6 +3,7 @@
 import React, { ReactNode } from "react";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import Chatbot from "@/components/shared/Chatbot";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -11,11 +12,12 @@ interface AdminLayoutProps {
 const RootLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
     <>
-     <div>
-        <Navbar/>
+      <div>
+        <Navbar />
         {children}
-        <Footer/>
-     </div>
+        <Footer />
+        <Chatbot />
+      </div>
     </>
   );
 };
