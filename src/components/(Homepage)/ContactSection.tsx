@@ -18,7 +18,7 @@ interface ApiResponse {
   message: string;
 }
 
-const Newsletter: React.FC = () => {
+const ContactSection: React.FC = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
@@ -185,4 +185,4 @@ const Newsletter: React.FC = () => {
   );
 };
 
-export default Newsletter;
+export default ContactSection;
