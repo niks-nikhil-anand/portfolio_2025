@@ -11,15 +11,22 @@ const marqueeItems = [
   "Tech Freelancer",
 ];
 
+const REPETITIONS = 4;
+
 const TechMarquee = () => {
+  const repeatedItems = React.useMemo(
+    () => Array(REPETITIONS).fill(marqueeItems).flat(),
+    []
+  );
+
   return (
-    <div className="relative w-full h-[500px] overflow-hidden flex items-center justify-center bg-white dark:bg-background">
+    <div className="relative w-full h-[400px] overflow-hidden flex items-center justify-center bg-white dark:bg-background">
       {/* First Marquee - Blue (Crossing downwards) */}
       <div className="absolute w-full transform -rotate-6 z-10">
-        <div className="relative w-full flex items-center h-32 bg-blue-500 dark:bg-blue-600">
+        <div className="relative w-full flex items-center h-28 bg-blue-500 dark:bg-blue-600">
           <div className="relative z-10 w-full overflow-hidden">
             <motion.div
-              className="flex whitespace-nowrap py-4"
+              className="flex whitespace-nowrap py-4 will-change-transform"
               animate={{ x: [0, -2000] }}
               transition={{
                 x: {
@@ -30,7 +37,7 @@ const TechMarquee = () => {
                 },
               }}
             >
-              {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+              {repeatedItems.map((item, index) => (
                 <span
                   key={index}
                   className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-white transition-colors duration-300"
@@ -46,10 +53,10 @@ const TechMarquee = () => {
 
       {/* Second Marquee - Red (Crossing upwards) */}
       <div className="absolute w-full transform rotate-6 z-20">
-        <div className="relative w-full flex items-center h-32 bg-red-500 dark:bg-red-600 border-y border-white/20">
+        <div className="relative w-full flex items-center h-28 bg-red-500 dark:bg-red-600 border-y border-white/20">
           <div className="relative z-10 w-full overflow-hidden">
             <motion.div
-              className="flex whitespace-nowrap py-4"
+              className="flex whitespace-nowrap py-4 will-change-transform"
               animate={{ x: [-2000, 0] }}
               transition={{
                 x: {
@@ -60,7 +67,7 @@ const TechMarquee = () => {
                 },
               }}
             >
-              {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+              {repeatedItems.map((item, index) => (
                 <span
                   key={index}
                   className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-white transition-colors duration-300"
