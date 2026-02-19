@@ -116,7 +116,7 @@ const ContactSection: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="container mx-auto px-4 sm:px-6 py-12 my-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5 rounded-3xl p-6 sm:p-12 text-center border border-border/50 shadow-sm"
+      className="w-[90%] max-w-4xl mx-auto py-12 my-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5 rounded-3xl px-5 sm:px-12 text-center border border-border/50 shadow-sm"
     >
       <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 font-heading">
         Let&apos;s work together!
