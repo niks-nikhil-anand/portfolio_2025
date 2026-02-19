@@ -24,9 +24,9 @@ const Experience = () => {
     return (
         <div className="container mx-auto px-4 py-8">
             <h2 className="text-3xl font-bold mb-8 text-center sm:text-left">Experience</h2>
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {experiences.map((exp, index) => (
-                    <Card key={index} className="p-6 rounded-xl bg-muted/50 border border-border/50 hover:bg-muted transition-colors">
+                    <Card key={index} className="flex flex-col p-6 rounded-xl bg-muted/50 border border-border/50 hover:bg-muted transition-colors">
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
@@ -39,7 +39,7 @@ const Experience = () => {
                                 <div className="text-sm text-muted-foreground mt-1">{exp.location}</div>
                             </div>
                         </div>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
+                        <p className="text-muted-foreground text-sm leading-relaxed flex-grow">
                             {exp.description}
                         </p>
                     </Card>
