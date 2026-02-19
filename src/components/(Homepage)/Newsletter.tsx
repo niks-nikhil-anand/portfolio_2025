@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
-import { 
-  BsCheckCircle, 
+import {
+  BsCheckCircle,
   BsExclamationTriangle
 } from 'react-icons/bs';
 
@@ -68,7 +68,7 @@ const Newsletter: React.FC = () => {
           icon: <BsCheckCircle className="w-4 h-4" />,
           duration: 5000
         });
-        
+
         // Reset form
         setEmail('');
         setName('');
@@ -77,7 +77,7 @@ const Newsletter: React.FC = () => {
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Something went wrong';
-      
+
       toast.error('Subscription failed', {
         description: errorMessage,
         icon: <BsExclamationTriangle className="w-4 h-4" />,
@@ -94,24 +94,24 @@ const Newsletter: React.FC = () => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5 }}
-      className="container mx-auto px-6 py-12 my-16 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 text-center border border-border"
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="container mx-auto px-4 sm:px-6 py-12 my-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5 rounded-3xl p-6 sm:p-12 text-center border border-border/50 shadow-sm"
     >
-      <h3 className="text-2xl font-bold text-foreground mb-2">
+      <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 font-heading">
         Never miss a post
       </h3>
       <p className="text-muted-foreground mb-6">
         Subscribe to get notified when I publish new articles
       </p>
-      
-      <div className="flex  gap-3 max-w-md mx-auto mb-4">
+
+      <div className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto mb-6">
         <input
           type="text"
           placeholder="Your name (optional)"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+          className="flex-1 px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
           disabled={isLoading}
         />
         <input
@@ -119,33 +119,32 @@ const Newsletter: React.FC = () => {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+          className="flex-[1.5] px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
           disabled={isLoading}
           required
         />
-     
 
-      <motion.button
-        onClick={handleSubmit}
-        className="px-6 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        whileHover={{ scale: isLoading ? 1 : 1.02 }}
-        whileTap={{ scale: isLoading ? 1 : 0.98 }}
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <div className="flex items-center space-x-2">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
-            />
-            <span>Subscribing...</span>
-          </div>
-        ) : (
-          'Subscribe'
-        )}
-      </motion.button>
-       </div>
+        <motion.button
+          onClick={handleSubmit}
+          className="sm:px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          whileHover={{ scale: isLoading ? 1 : 1.02 }}
+          whileTap={{ scale: isLoading ? 1 : 0.98 }}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <div className="flex items-center justify-center space-x-2">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="w-4 h-4 border-2 border-current border-t-transparent rounded-full"
+              />
+              <span>Subscribing...</span>
+            </div>
+          ) : (
+            'Subscribe Now'
+          )}
+        </motion.button>
+      </div>
 
       <p className="text-xs text-muted-foreground mt-4">
         We respect your privacy and will never share your email.
