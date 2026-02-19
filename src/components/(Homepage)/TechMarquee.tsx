@@ -30,7 +30,7 @@ const TechMarquee = () => {
                 },
               }}
             >
-              {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+              {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
                 <span
                   key={index}
                   className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-white transition-colors duration-300"
@@ -60,7 +60,7 @@ const TechMarquee = () => {
                 },
               }}
             >
-              {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
+              {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, index) => (
                 <span
                   key={index}
                   className="inline-block px-8 text-2xl md:text-3xl lg:text-4xl font-bold text-white transition-colors duration-300"
