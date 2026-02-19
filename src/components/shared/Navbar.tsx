@@ -165,8 +165,8 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Center - Logo */}
-        <div className="absolute left-1/2 transform -translate-x-1/2">
+        {/* Logo - Centered on Desktop, Right on Mobile */}
+        <div className="absolute right-4 md:left-1/2 md:right-auto md:transform md:-translate-x-1/2">
           <motion.a
             href="#home"
             className="flex items-center space-x-2 group"
@@ -188,26 +188,6 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-2">
             {renderThemeToggle()}
           </div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden p-2 rounded-lg hover:bg-accent"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <div
-              className={`w-5 h-5 ${isDarkMode ? "text-white" : "text-black"}`}
-            >
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </div>
-          </motion.button>
         </div>
       </div>
     </nav>
