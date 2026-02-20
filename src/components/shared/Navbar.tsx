@@ -3,15 +3,12 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { BsMoonStars, BsSun, BsInstagram, BsTwitter } from "react-icons/bs";
-import { BiUser, BiBriefcase, BiPackage } from "react-icons/bi";
-import { HiOutlineMail } from "react-icons/hi";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
 
 // Remove the empty interface and use React.FC without props type
 const Navbar: React.FC = () => {
   const { theme, setTheme } = useTheme();
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
 
   const isDarkMode = theme === "dark";
@@ -24,16 +21,6 @@ const Navbar: React.FC = () => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = (): void => {
-      const scrollTop: number = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   // Don't render until mounted to avoid hydration mismatch
   if (!mounted) {
     return null;
@@ -43,9 +30,6 @@ const Navbar: React.FC = () => {
   const navbarClasses: string = `relative container mx-auto mt-4 sm:mt-6 mb-4 px-5 sm:px-8 py-3 sm:py-4 transition-all duration-500 z-50 rounded-2xl sm:rounded-full border backdrop-blur-xl ${isDarkMode
     ? "bg-black/40 border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
     : "bg-white/60 border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
-    }`;
-
-  const navLinkClasses: string = `flex items-center space-x-2 px-3 py-2 rounded-lg font-medium transition-all duration-200 hover:scale-105 hover:bg-accent ${isDarkMode ? "text-white" : "text-black"
     }`;
 
   const renderThemeToggle = () => (

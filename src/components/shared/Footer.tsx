@@ -8,7 +8,7 @@ const Footer = () => {
           © 2026 Nikhil Anand • Full Stack Engineer
         </p>
         <p className="text-xs text-muted-foreground italic">
-          "A journey of a thousand light-years begins with a single step."
+          &quot;A journey of a thousand light-years begins with a single step.&quot;
         </p>
       </div>
     </footer>
