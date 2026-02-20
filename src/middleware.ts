@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { parse } from "cookie";
 
-export async function middleware(req:NextRequest) {
-  const cookieHeader = req.headers.get("cookie");
-  const cookies = parse(cookieHeader || "");
-  const userAuthToken = cookies.adminAuth;
+export async function middleware(req: NextRequest) {
+  const userAuthToken = req.cookies.get("adminAuth")?.value;
 
   const { pathname } = req.nextUrl;
 
