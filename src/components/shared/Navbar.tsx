@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
   }
 
   // Dynamic navbar classes with proper background colors
-  const navbarClasses: string = `relative w-[92%] max-w-5xl mx-auto mt-4 sm:mt-6 mb-4 px-5 sm:px-8 py-3 sm:py-4 transition-all duration-500 z-50 rounded-2xl sm:rounded-full border backdrop-blur-xl ${isDarkMode
+  const navbarClasses: string = `relative container mx-auto mt-4 sm:mt-6 mb-4 px-5 sm:px-8 py-3 sm:py-4 transition-all duration-500 z-50 rounded-2xl sm:rounded-full border backdrop-blur-xl ${isDarkMode
     ? "bg-black/40 border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
     : "bg-white/60 border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
     }`;
