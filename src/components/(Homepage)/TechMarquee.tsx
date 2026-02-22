@@ -4,11 +4,29 @@ import { motion } from "framer-motion";
 
 const marqueeItems = [
   "Full-Stack Developer",
-  "App Developer",
+  "Freelancer",
+  "Indie Developer",
+  "Solo Founder",
+  "Startup Builder",
+  "SaaS Developer",
+  "Product Engineer",
+  "Web App Developer",
+  "Mobile App Developer",
   "Gen AI Developer",
-  "Frontend Developer",
-  "Backend Developer",
-  "Tech Freelancer",
+  "AI Integration Specialist",
+  "GenAI Developer",
+  "Backend Engineer",
+  "Frontend Engineer",
+  "Tech Consultant",
+  "MVP Builder",
+  "Scalable Systems Developer",
+  "Cloud-Native Developer",
+  "Automation Expert",
+  "Problem Solver",
+  "Digital Product Creator",
+  "Remote Developer",
+  "Tech Entrepreneur",
+  "Open Source Enthusiast"
 ];
 
 const REPETITIONS = 4;
