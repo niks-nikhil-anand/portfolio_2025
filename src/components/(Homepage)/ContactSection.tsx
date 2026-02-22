@@ -23,6 +23,7 @@ const ContactSection: React.FC = () => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,6 +93,7 @@ const ContactSection: React.FC = () => {
         setEmail('');
         setName('');
         setMessage('');
+        setIsSuccess(true);
       } else {
         throw new Error(data.message || 'Failed to send message');
       }
@@ -131,7 +133,10 @@ const ContactSection: React.FC = () => {
             type="text"
             placeholder="Your name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (isSuccess) setIsSuccess(false);
+            }}
             className="flex-1 px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
             disabled={isLoading}
             required
@@ -140,7 +145,10 @@ const ContactSection: React.FC = () => {
             type="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (isSuccess) setIsSuccess(false);
+            }}
             className="flex-1 px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm"
             disabled={isLoading}
             required
@@ -150,11 +158,25 @@ const ContactSection: React.FC = () => {
         <textarea
           placeholder="How can I help you?"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            if (isSuccess) setIsSuccess(false);
+          }}
           className="w-full px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-sm min-h-[120px] resize-none"
           disabled={isLoading}
           required
         />
+
+        {isSuccess && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center gap-2 text-green-500 font-medium py-1"
+          >
+            <BsCheckCircle className="w-4 h-4" />
+            <span>Message sent successfully!</span>
+          </motion.div>
+        )}
 
         <motion.button
           onClick={handleSubmit}
