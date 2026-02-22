@@ -249,7 +249,7 @@ const ProjectsShowcase: React.FC = () => {
   };
 
   return (
-    <div className=" bg-background transition-colors duration-300">
+    <div className=" bg-background transition-colors duration-300" id="projects">
       <div className="container mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-8">
