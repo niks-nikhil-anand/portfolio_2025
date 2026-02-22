@@ -3,6 +3,7 @@ import React, { useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
+import Link from "next/link";
 
 interface Particle {
   x: number;
@@ -235,10 +236,10 @@ const HeroSection: React.FC = () => {
               className="border-border/50 bg-background/50 backdrop-blur-sm hover:bg-accent hover:text-accent-foreground transition-all duration-300 text-base h-12 px-8 rounded-xl font-semibold w-full sm:w-auto flex items-center justify-center gap-2 group"
               asChild
             >
-              <a href="#projects">
+              <Link href="#projects">
                 View Projects
                 <BsArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
             </Button>
           </motion.div>
         </motion.div>
