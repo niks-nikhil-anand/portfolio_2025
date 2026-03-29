@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>System Design Expert Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+/* ── DARK MODE (default) ── */
+:root{
+  --bg:#080810;
+  --bg2:#0e0e1a;
+  --bg3:#131325;
+  --bg4:#1a1a2e;
+  --surface:#16162a;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.11);
+  --border3:rgba(255,255,255,0.20);
+  --text:#eeeaf8;
+  --muted:#7a7890;
+  --muted2:#5a5870;
+  --p1:#7c6af7;
+  --p2:#a594ff;
+  --p3:#c4b8ff;
+  --g1:#00e5a0;
+  --g2:#00c484;
+  --a1:#ffb340;
+  --a2:#ff8c42;
+  --r1:#ff5e7d;
+  --b1:#4db8ff;
+  --b2:#80cfff;
+  --t1:#00d4c8;
+  --radius:12px;
+  --radius-lg:18px;
+  --radius-xl:24px;
+  --nav-bg:rgba(8,8,16,0.82);
+  --modal-overlay-bg:rgba(4,4,10,0.92);
+  --modal-footer-bg:rgba(8,8,16,0.6);
+  --grain-opacity:0.5;
+  --grid-color:rgba(124,106,247,0.03);
+  --orb1-color:rgba(124,106,247,0.08);
+  --orb2-color:rgba(0,229,160,0.06);
+  --orb3-color:rgba(255,179,64,0.05);
+  --shadow:0 40px 120px rgba(0,0,0,0.8);
+  --card-shadow:0 4px 24px rgba(0,0,0,0.3);
+}
+
+/* ── LIGHT MODE ── */
+html.light{
+  --bg:#f5f4f0;
+  --bg2:#ffffff;
+  --bg3:#f0efe9;
+  --bg4:#e8e6de;
+  --surface:#ffffff;
+  --border:rgba(0,0,0,0.07);
+  --border2:rgba(0,0,0,0.12);
+  --border3:rgba(0,0,0,0.20);
+  --text:#18181c;
+  --muted:#6b6880;
+  --muted2:#9896a8;
+  --p1:#6254e8;
+  --p2:#7c6af7;
+  --p3:#9b8cff;
+  --g1:#00a872;
+  --g2:#007d56;
+  --a1:#d4820a;
+  --a2:#bf6a28;
+  --r1:#e03050;
+  --b1:#1a8fe0;
+  --b2:#3da8f5;
+  --t1:#00a89e;
+  --nav-bg:rgba(245,244,240,0.88);
+  --modal-overlay-bg:rgba(20,18,30,0.72);
+  --modal-footer-bg:rgba(245,244,240,0.9);
+  --grain-opacity:0.2;
+  --grid-color:rgba(98,84,232,0.04);
+  --orb1-color:rgba(124,106,247,0.06);
+  --orb2-color:rgba(0,168,114,0.05);
+  --orb3-color:rgba(212,130,10,0.04);
+  --shadow:0 40px 120px rgba(0,0,0,0.15);
+  --card-shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* ── THEME TRANSITION ── */
+html{scroll-behavior:smooth;}
+body,nav,#modal-box,#modal-footer,.topic-card,.resource-card,.practice-col,
+.numbers-section,.toc-block,.number-row,footer{
+  transition:background 0.3s ease,border-color 0.3s ease,color 0.3s ease,box-shadow 0.3s ease;
+}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* ── GRAIN OVERLAY ── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:var(--grain-opacity);
+  transition:opacity 0.3s ease;
+}
+
+/* ── ANIMATED BG GRID ── */
+.grid-bg{
+  position:fixed;inset:0;z-index:0;
+  background-image:
+    linear-gradient(var(--grid-color) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 40%,transparent 100%);
+  transition:background-image 0.3s ease;
+}
+
+/* ── ORBS ── */
+.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;}
+.orb-1{width:700px;height:700px;background:radial-gradient(circle,var(--orb1-color),transparent 70%);top:-300px;left:-200px;}
+.orb-2{width:500px;height:500px;background:radial-gradient(circle,var(--orb2-color),transparent 70%);bottom:-100px;right:-150px;}
+.orb-3{width:400px;height:400px;background:radial-gradient(circle,var(--orb3-color),transparent 70%);top:40%;left:40%;}
+
+/* ── PROGRESS ── */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--p1),var(--g1));z-index:9998;width:0%;transition:width 0.08s;}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--nav-bg);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;height:56px;
+}
+.nav-logo{
+  font-family:'Fira Code',monospace;font-size:13px;font-weight:500;
+  color:var(--muted);letter-spacing:0.05em;
+}
+.nav-logo .hl{color:var(--p2);}
+.nav-links{display:flex;gap:0.25rem;}
+.nav-link{
+  font-size:12px;padding:5px 12px;border-radius:20px;
+  color:var(--muted);text-decoration:none;font-family:'Fira Code',monospace;
+  transition:color 0.2s,background 0.2s;letter-spacing:0.04em;
+}
+.nav-link:hover{color:var(--text);background:var(--bg4);}
+.nav-cta{
+  font-size:11px;padding:6px 14px;border-radius:20px;
+  background:var(--p1);color:#fff;text-decoration:none;font-weight:600;
+  letter-spacing:0.05em;transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.85;}
+
+/* ── THEME TOGGLE BUTTON ── */
+#theme-toggle{
+  display:inline-flex;align-items:center;gap:7px;
+  font-family:'Fira Code',monospace;font-size:11px;font-weight:500;
+  padding:6px 14px;border-radius:20px;
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--muted);cursor:pointer;letter-spacing:0.04em;
+  transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.15s;
+  white-space:nowrap;
+}
+#theme-toggle:hover{
+  background:var(--bg4);border-color:var(--border3);color:var(--text);
+  transform:scale(1.04);
+}
+#theme-toggle:active{transform:scale(0.97);}
+#theme-icon{font-size:13px;line-height:1;transition:transform 0.4s ease;}
+#theme-toggle:hover #theme-icon{transform:rotate(20deg);}
+html.light #theme-icon{transform:rotate(0deg);}
+
+/* Light mode specific overrides */
+html.light .hero h1 .line2{
+  background:linear-gradient(135deg,var(--p1) 0%,#0a9e6e 50%,#c17000 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+html.light .stat-num{
+  background:linear-gradient(135deg,var(--p1),var(--g1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+html.light .scroll-cta:hover{border-color:var(--p1);color:var(--p1);}
+html.light .hero-badge{background:rgba(98,84,232,0.08);}
+html.light .blink{background:var(--g1);}
+html.light .numbers-section::before{color:rgba(0,0,0,0.03);}
+html.light #modal-box{box-shadow:0 40px 120px rgba(0,0,0,0.18),0 0 0 1px rgba(0,0,0,0.06);}
+html.light .topic-card:hover{background:var(--bg3);}
+html.light footer{background:var(--bg3);}
+html.light .practice-col{background:var(--bg2);}
+html.light .resource-card{background:var(--bg2);}
+html.light #modal-body{background:var(--bg2);}
+html.light #modal-items-list li{background:var(--bg3);}
+html.light #modal-items-list li:hover{background:var(--bg4);}
+html.light kbd{background:var(--bg3);}
+
+/* ── WRAPPER ── */
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2rem;}
+
+/* ── HERO ── */
+.hero{
+  padding:7rem 0 5rem;text-align:center;
+  position:relative;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Fira Code',monospace;font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--muted);
+  padding:6px 16px;border:1px solid var(--border2);border-radius:20px;
+  background:rgba(124,106,247,0.08);margin-bottom:2.5rem;
+}
+.hero-badge .blink{
+  width:6px;height:6px;border-radius:50%;background:var(--g1);
+  animation:blink 1.4s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+
+.hero h1{
+  font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;
+  line-height:1.0;letter-spacing:-0.04em;
+  margin-bottom:1.5rem;
+}
+.hero h1 .line1{display:block;color:var(--text);}
+.hero h1 .line2{
+  display:block;font-family:'Lora',serif;font-style:italic;font-weight:400;
+  font-size:0.85em;
+  background:linear-gradient(135deg,var(--p2) 0%,var(--g1) 50%,var(--a1) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero h1 .line3{display:block;color:var(--text);}
+
+.hero-desc{
+  font-size:16px;color:var(--muted);line-height:1.85;
+  max-width:560px;margin:0 auto 3rem;font-weight:400;
+}
+
+.hero-stats{
+  display:flex;align-items:center;justify-content:center;
+  gap:2rem;flex-wrap:wrap;margin-bottom:3rem;
+}
+.stat{text-align:center;}
+.stat-num{
+  font-size:2rem;font-weight:800;letter-spacing:-0.04em;
+  background:linear-gradient(135deg,var(--p2),var(--g1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:11px;color:var(--muted2);font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;}
+.stat-div{width:1px;height:40px;background:var(--border2);}
+
+.scroll-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Fira Code',monospace;font-size:12px;color:var(--muted);
+  text-decoration:none;padding:10px 20px;border:1px solid var(--border2);border-radius:20px;
+  transition:border-color 0.2s,color 0.2s;
+}
+.scroll-cta:hover{border-color:var(--p2);color:var(--p2);}
+.scroll-cta .arrow{animation:bounce 1.5s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(3px);}}
+
+/* ── PHASE LABEL ── */
+.phase-header{
+  display:flex;align-items:center;gap:1.25rem;
+  margin:4rem 0 1.5rem;
+}
+.phase-num{
+  font-family:'Fira Code',monospace;font-size:10px;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--muted2);
+  padding:4px 10px;border:1px solid var(--border);border-radius:20px;
+  flex-shrink:0;
+}
+.phase-title-text{
+  font-size:1.65rem;font-weight:700;letter-spacing:-0.02em;line-height:1.2;
+}
+.phase-line{flex:1;height:1px;background:var(--border);}
+.phase-count{
+  font-family:'Fira Code',monospace;font-size:10px;color:var(--muted2);flex-shrink:0;
+}
+
+/* ── TOPIC GRID ── */
+.topic-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:14px;margin-bottom:1rem;
+}
+
+/* ── TOPIC CARD ── */
+.topic-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;cursor:pointer;
+  transition:border-color 0.25s,transform 0.25s,background 0.25s;
+  position:relative;
+  opacity:0;transform:translateY(18px);
+}
+.topic-card.visible{opacity:1;transform:translateY(0);}
+.topic-card:hover{border-color:var(--border3);transform:translateY(-3px);background:var(--bg3);}
+
+.topic-card-top{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.topic-card-inner{padding:1.25rem 1.35rem 1.1rem;}
+
+.topic-card-head{
+  display:flex;align-items:flex-start;gap:10px;margin-bottom:0.85rem;
+}
+.topic-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;border:1px solid var(--border2);
+}
+.topic-name{
+  font-size:15px;font-weight:700;letter-spacing:-0.01em;line-height:1.25;
+  flex:1;padding-top:2px;
+}
+.topic-tag{
+  font-family:'Fira Code',monospace;font-size:9px;text-transform:uppercase;
+  letter-spacing:0.1em;padding:3px 8px;border-radius:20px;border:1px solid;
+  flex-shrink:0;margin-top:2px;
+}
+
+.topic-items{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.topic-items li{
+  display:flex;align-items:flex-start;gap:7px;
+  font-size:12.5px;color:var(--muted);line-height:1.55;font-weight:400;
+}
+.topic-items li::before{
+  content:'→';font-family:'Fira Code',monospace;font-size:11px;
+  color:var(--muted2);flex-shrink:0;margin-top:1px;
+}
+
+.topic-card-foot{
+  border-top:1px solid var(--border);
+  padding:0.6rem 1.35rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.foot-count{font-family:'Fira Code',monospace;font-size:10px;color:var(--muted2);}
+.foot-difficulty{font-family:'Fira Code',monospace;font-size:10px;}
+
+/* ── NUMBERS TABLE ── */
+.numbers-section{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xl);
+  padding:2rem;margin:1.5rem 0 2.5rem;
+  overflow:hidden;position:relative;
+}
+.numbers-section::before{
+  content:'latency cheat sheet';
+  position:absolute;bottom:-20px;right:20px;
+  font-family:'Lora',serif;font-style:italic;font-size:72px;
+  color:rgba(255,255,255,0.025);pointer-events:none;line-height:1;
+  user-select:none;white-space:nowrap;
+}
+.numbers-title{
+  font-family:'Fira Code',monospace;font-size:10px;text-transform:uppercase;
+  letter-spacing:0.15em;color:var(--muted2);margin-bottom:1.25rem;
+}
+.numbers-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:8px;
+}
+.number-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:var(--bg3);border-radius:var(--radius);
+  border:1px solid var(--border);
+}
+.number-label{font-size:12.5px;color:var(--muted);font-weight:500;}
+.number-val{
+  font-family:'Fira Code',monospace;font-size:12px;font-weight:500;
+}
+
+/* ── PRACTICE SECTION ── */
+.practice-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;margin-bottom:2rem;
+}
+@media(max-width:768px){.practice-grid{grid-template-columns:1fr;}}
+
+.practice-col{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.practice-col-head{
+  padding:1rem 1.25rem 0.75rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.practice-level-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.practice-col-title{font-size:13.5px;font-weight:700;}
+.practice-col-body{padding:0.75rem 1.25rem 1rem;}
+.practice-item{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:6px 0;border-bottom:1px solid var(--border);
+  font-size:12.5px;color:var(--muted);line-height:1.5;
+}
+.practice-item:last-child{border-bottom:none;padding-bottom:0;}
+.practice-item-icon{font-size:14px;flex-shrink:0;margin-top:0px;}
+
+/* ── RESOURCES ── */
+.resources-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:12px;margin-bottom:4rem;
+}
+.resource-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:1.25rem;transition:border-color 0.2s,transform 0.2s;
+  position:relative;overflow:hidden;
+}
+.resource-card:hover{border-color:var(--border3);transform:translateY(-2px);}
+.resource-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.resource-emoji{font-size:22px;margin-bottom:0.75rem;display:block;}
+.resource-title{font-size:14.5px;font-weight:700;margin-bottom:0.3rem;letter-spacing:-0.01em;}
+.resource-desc{font-size:12.5px;color:var(--muted);line-height:1.65;}
+.resource-type{
+  display:inline-block;margin-top:0.75rem;
+  font-family:'Fira Code',monospace;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:0.1em;padding:3px 8px;border-radius:20px;
+  border:1px solid var(--border2);color:var(--muted2);
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  background:var(--bg2);
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;padding:2.5rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-left .fl-brand{
+  font-family:'Fira Code',monospace;font-size:12px;color:var(--muted);
+}
+.footer-left .fl-brand span{color:var(--p2);}
+.footer-left .fl-sub{font-size:11.5px;color:var(--muted2);margin-top:4px;}
+.footer-right{display:flex;gap:1.5rem;}
+.footer-right a{font-size:12px;color:var(--muted2);text-decoration:none;transition:color 0.15s;font-family:'Fira Code',monospace;}
+.footer-right a:hover{color:var(--muted);}
+
+/* ══════════════════════════════════
+   MODAL — FULLSCREEN
+══════════════════════════════════ */
+#modal-overlay{
+  position:fixed;inset:0;z-index:10000;
+  background:var(--modal-overlay-bg);
+  backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+#modal-overlay.open{opacity:1;pointer-events:all;}
+
+#modal-box{
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  width:100%;
+  height:100%;
+  max-width:100%;
+  max-height:100%;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  position:relative;
+  transform:scale(0.96) translateY(24px);
+  transition:transform 0.35s cubic-bezier(0.34,1.4,0.64,1),opacity 0.3s ease;
+  opacity:0;
+  box-shadow:0 40px 120px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.05);
+}
+#modal-overlay.open #modal-box{
+  transform:scale(1) translateY(0);
+  opacity:1;
+}
+
+/* top gradient accent bar */
+#modal-accent-bar{
+  height:4px;width:100%;flex-shrink:0;
+  border-radius:24px 24px 0 0;
+}
+
+/* ── HEADER ── */
+#modal-header{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;
+  padding:2.5rem 3rem 2rem;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+#modal-header-left{display:flex;align-items:flex-start;gap:20px;flex:1;min-width:0;}
+
+#modal-icon-wrap{
+  width:64px;height:64px;border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;flex-shrink:0;border:1px solid var(--border2);
+}
+#modal-title-block{flex:1;min-width:0;}
+#modal-phase-label{
+  font-family:'Fira Code',monospace;font-size:11px;
+  text-transform:uppercase;letter-spacing:0.14em;color:var(--muted2);
+  margin-bottom:6px;
+}
+#modal-title{
+  font-family:'Syne',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;
+  letter-spacing:-0.03em;line-height:1.15;margin-bottom:6px;
+}
+#modal-tagline{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:15px;color:var(--muted);line-height:1.6;
+}
+
+/* close button */
+#modal-close{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:50%;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);flex-shrink:0;
+  transition:background 0.15s,color 0.15s,border-color 0.15s,transform 0.25s;
+}
+#modal-close:hover{
+  background:rgba(255,94,125,0.12);color:#ff5e7d;
+  border-color:rgba(255,94,125,0.35);transform:rotate(90deg);
+}
+#modal-close svg{display:block;}
+
+/* ── META ROW ── */
+#modal-meta-row{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:1.25rem 3rem;border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+#modal-tag-badge,#modal-difficulty-badge,#modal-count-badge{
+  font-family:'Fira Code',monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:0.1em;padding:5px 14px;border-radius:20px;border:1px solid;
+}
+#modal-count-badge{color:var(--muted2);border-color:var(--border2);background:var(--bg3);}
+
+/* ── BODY ── */
+#modal-body{
+  overflow-y:auto;
+  padding:2rem 3rem 2rem;
+  flex:1;
+  scrollbar-width:thin;scrollbar-color:var(--border2) transparent;
+}
+#modal-body::-webkit-scrollbar{width:5px;}
+#modal-body::-webkit-scrollbar-track{background:transparent;}
+#modal-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+
+#modal-section-label{
+  font-family:'Fira Code',monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:0.15em;color:var(--muted2);margin-bottom:1.25rem;
+}
+
+#modal-items-list{
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:12px;
+}
+#modal-items-list li{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 20px;
+  background:var(--bg3);border:1px solid var(--border);border-radius:14px;
+  font-size:14.5px;color:var(--muted);line-height:1.65;
+  animation:itemIn 0.35s ease both;
+  transition:border-color 0.2s,background 0.2s;
+}
+#modal-items-list li:hover{background:var(--bg4);border-color:var(--border2);}
+#modal-items-list li:nth-child(1){animation-delay:0.04s;}
+#modal-items-list li:nth-child(2){animation-delay:0.08s;}
+#modal-items-list li:nth-child(3){animation-delay:0.12s;}
+#modal-items-list li:nth-child(4){animation-delay:0.16s;}
+#modal-items-list li:nth-child(5){animation-delay:0.20s;}
+#modal-items-list li:nth-child(6){animation-delay:0.24s;}
+#modal-items-list li:nth-child(7){animation-delay:0.28s;}
+@keyframes itemIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.modal-item-num{
+  font-family:'Fira Code',monospace;font-size:11px;color:var(--muted2);
+  flex-shrink:0;margin-top:3px;min-width:24px;
+}
+.modal-item-arrow{
+  font-family:'Fira Code',monospace;font-size:14px;
+  flex-shrink:0;margin-top:2px;
+}
+
+/* ── FOOTER ── */
+#modal-footer{
+  border-top:1px solid var(--border);
+  padding:1.25rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+  background:var(--modal-footer-bg);
+}
+#modal-footer-hint{
+  font-family:'Fira Code',monospace;font-size:12px;color:var(--muted2);
+  display:flex;align-items:center;gap:8px;
+}
+kbd{
+  font-family:'Fira Code',monospace;font-size:10px;
+  padding:3px 8px;border:1px solid var(--border2);border-radius:5px;
+  background:var(--bg3);color:var(--muted);
+}
+#modal-close-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Fira Code',monospace;font-size:12px;
+  padding:9px 22px;border-radius:20px;
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--muted);cursor:pointer;letter-spacing:0.04em;
+  transition:background 0.15s,color 0.15s,border-color 0.15s;
+}
+#modal-close-btn:hover{
+  background:rgba(255,94,125,0.1);color:#ff5e7d;border-color:rgba(255,94,125,0.3);
+}
+#modal-close-btn svg{flex-shrink:0;}
+
+/* card click hint */
+.topic-card .click-hint{
+  position:absolute;bottom:10px;right:12px;
+  font-family:'Fira Code',monospace;font-size:9px;color:var(--muted2);
+  opacity:0;transition:opacity 0.2s;pointer-events:none;letter-spacing:0.06em;
+}
+.topic-card:hover .click-hint{opacity:1;}
+
+/* responsive modal padding */
+@media(max-width:768px){
+  #modal-overlay{padding:0;}
+  #modal-box{border-radius:0;height:100%;max-height:100%;}
+  #modal-header{padding:1.5rem 1.25rem 1.25rem;}
+  #modal-meta-row{padding:0.85rem 1.25rem;}
+  #modal-body{padding:1.25rem 1.25rem 1rem;}
+  #modal-footer{padding:1rem 1.25rem;}
+  #modal-items-list{grid-template-columns:1fr;}
+  #modal-title{font-size:1.4rem;}
+  #modal-icon-wrap{width:48px;height:48px;font-size:22px;}
+  #modal-footer-hint{display:none;}
+}
+
+/* ── BACK TOP ── */
+#back-top{
+  position:fixed;bottom:2rem;right:2rem;
+  width:42px;height:42px;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;opacity:0;pointer-events:none;
+  transition:opacity 0.2s,transform 0.2s;z-index:50;color:var(--muted);text-decoration:none;
+}
+#back-top.show{opacity:1;pointer-events:all;}
+#back-top:hover{transform:translateY(-2px);color:var(--text);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+.hero>*{animation:fadeUp 0.65s ease both;}
+.hero>*:nth-child(1){animation-delay:0.05s;}
+.hero>*:nth-child(2){animation-delay:0.12s;}
+.hero>*:nth-child(3){animation-delay:0.2s;}
+.hero>*:nth-child(4){animation-delay:0.28s;}
+.hero>*:nth-child(5){animation-delay:0.36s;}
+
+.topic-card{transition:opacity 0.45s ease,transform 0.45s ease,border-color 0.25s,background 0.25s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .wrap{padding:0 1rem;}
+  .nav-links{display:none;}
+  .hero{padding:4rem 0 3rem;}
+  .hero-stats{gap:1.25rem;}
+  .topic-grid{grid-template-columns:1fr;}
+  .numbers-grid{grid-template-columns:1fr 1fr;}
+  .phase-title-text{font-size:1.3rem;}
+}
+@media(max-width:480px){
+  .numbers-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:2.4rem;}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><span class="hl">//</span> sys.design<span class="hl">/</span>roadmap</div>
+    <div class="nav-links">
+      <a class="nav-link" href="#phase-1">Foundations</a>
+      <a class="nav-link" href="#phase-3">Distributed</a>
+      <a class="nav-link" href="#phase-4">Architecture</a>
+      <a class="nav-link" href="#practice">Practice</a>
+      <a class="nav-link" href="#resources">Resources</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+        <span id="theme-icon">☀️</span>
+        <span id="theme-label">Light</span>
+      </button>
+      <a class="nav-cta" href="#phase-1">Start Learning →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-badge"><span class="blink"></span>Complete Learning Path · 2025</div>
+    <h1>
+      <span class="line1">Become a System</span>
+      <span class="line2">Design Expert</span>
+      <span class="line3">From Zero</span>
+    </h1>
+    <p class="hero-desc">Every concept, pattern, and technique you need to design systems that scale to millions of users — organized in the exact order you should learn them.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">9</div><div class="stat-label">Phases</div></div>
+      <div class="stat-div"></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Concepts</div></div>
+      <div class="stat-div"></div>
+      <div class="stat"><div class="stat-num">18</div><div class="stat-label">Practice Problems</div></div>
+      <div class="stat-div"></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Resources</div></div>
+    </div>
+    <a class="scroll-cta" href="#phase-1">Begin the roadmap <span class="arrow">↓</span></a>
+  </section>
+</div>
+
+<!-- PHASES -->
+<div class="wrap" id="phases-container"></div>
+
+<!-- LATENCY NUMBERS -->
+<div class="wrap">
+  <div class="phase-header" style="margin-top:3rem;">
+    <span class="phase-num">Phase 08</span>
+    <div class="phase-title-text">Numbers Every Designer Must Know</div>
+    <div class="phase-line"></div>
+    <span class="phase-count">8 values</span>
+  </div>
+  <div class="numbers-section">
+    <div class="numbers-title">Latency Reference Table</div>
+    <div class="numbers-grid" id="numbers-grid"></div>
+  </div>
+</div>
+
+<!-- PRACTICE PROBLEMS -->
+<div class="wrap">
+  <div class="phase-header" id="practice">
+    <span class="phase-num">Phase 09</span>
+    <div class="phase-title-text">Classic Design Problems</div>
+    <div class="phase-line"></div>
+    <span class="phase-count">18 problems</span>
+  </div>
+  <div class="practice-grid" id="practice-grid"></div>
+</div>
+
+<!-- RESOURCES -->
+<div class="wrap">
+  <div class="phase-header" id="resources">
+    <span class="phase-num">Reference</span>
+    <div class="phase-title-text">Best Resources to Learn All of This</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="resources-grid" id="resources-grid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="fl-brand"><span>//</span> sys.design/roadmap</div>
+      <div class="fl-sub">Zero to expert — one concept at a time.</div>
+    </div>
+    <div class="footer-right">
+      <a href="#phase-1">Back to top ↑</a>
+      <a href="https://github.com">GitHub</a>
+      <a href="https://linkedin.com">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<a href="#" id="back-top">↑</a>
+
+<!-- MODAL OVERLAY -->
+<div id="modal-overlay" aria-modal="true" role="dialog">
+  <div id="modal-box">
+    <div id="modal-accent-bar"></div>
+    <div id="modal-header">
+      <div id="modal-header-left">
+        <div id="modal-icon-wrap"><span id="modal-icon"></span></div>
+        <div id="modal-title-block">
+          <div id="modal-phase-label"></div>
+          <div id="modal-title"></div>
+          <div id="modal-tagline"></div>
+        </div>
+      </div>
+      <button id="modal-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M1.5 1.5L14.5 14.5M14.5 1.5L1.5 14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div id="modal-meta-row">
+      <span id="modal-tag-badge"></span>
+      <span id="modal-difficulty-badge"></span>
+      <span id="modal-count-badge"></span>
+    </div>
+    <div id="modal-body">
+      <div id="modal-section-label">Topics covered</div>
+      <ul id="modal-items-list"></ul>
+    </div>
+    <div id="modal-footer">
+      <span id="modal-footer-hint">Press <kbd>Esc</kbd> to close</span>
+      <button id="modal-close-btn">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 1L12 12M12 1L1 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════ */
+const phases = [
+  {
+    id:"phase-1",
+    num:"Phase 01",
+    title:"Foundations",
+    subtitle:"Learn these before anything else",
+    count:"12 topics",
+    color:"#7c6af7",
+    topics:[
+      {
+        icon:"🌐",iconBg:"rgba(124,106,247,0.15)",name:"HTTP & Networking",
+        tag:"Critical",tagColor:"#7c6af7",tagBg:"rgba(124,106,247,0.15)",
+        difficulty:"Beginner",diffColor:"#00e5a0",
+        items:["How HTTP/HTTPS request-response cycle works","TCP vs UDP — when each protocol is used","DNS — how domain names resolve to IP addresses","WebSockets & long polling for real-time comms"]
+      },
+      {
+        icon:"📡",iconBg:"rgba(77,184,255,0.15)",name:"API Paradigms",
+        tag:"Critical",tagColor:"#4db8ff",tagBg:"rgba(77,184,255,0.15)",
+        difficulty:"Beginner",diffColor:"#00e5a0",
+        items:["REST — stateless, resource-based design principles","GraphQL — flexible queries, single endpoint","gRPC — binary protocol, high-performance RPCs","When to use which paradigm and why"]
+      },
+      {
+        icon:"🗄️",iconBg:"rgba(0,212,200,0.15)",name:"Database Fundamentals",
+        tag:"Critical",tagColor:"#00d4c8",tagBg:"rgba(0,212,200,0.15)",
+        difficulty:"Beginner",diffColor:"#00e5a0",
+        items:["SQL vs NoSQL — core differences and tradeoffs","ACID properties — Atomicity, Consistency, Isolation, Durability","Indexes — B-tree vs hash index internals","Transactions, locking, and connection pooling"]
+      },
+      {
+        icon:"⚙️",iconBg:"rgba(255,179,64,0.15)",name:"OS Concepts",
+        tag:"Important",tagColor:"#ffb340",tagBg:"rgba(255,179,64,0.12)",
+        difficulty:"Beginner",diffColor:"#00e5a0",
+        items:["Processes vs Threads — differences and use cases","Concurrency vs Parallelism — common confusion clarified","Memory management basics — stack vs heap","File I/O and system calls overview"]
+      }
+    ]
+  },
+  {
+    id:"phase-2",
+    num:"Phase 02",
+    title:"Core Scaling Concepts",
+    subtitle:"The fundamentals of making systems bigger",
+    count:"16 topics",
+    color:"#00e5a0",
+    topics:[
+      {
+        icon:"📈",iconBg:"rgba(0,229,160,0.15)",name:"Scalability Basics",
+        tag:"Critical",tagColor:"#00e5a0",tagBg:"rgba(0,229,160,0.12)",
+        difficulty:"Beginner",diffColor:"#00e5a0",
+        items:["Vertical scaling (scale up) vs Horizontal scaling (scale out)","Stateless vs Stateful services — why stateless scales better","Session management strategies at scale","Understanding bottlenecks and where they occur"]
+      },
+      {
+        icon:"⚖️",iconBg:"rgba(124,106,247,0.15)",name:"Load Balancing",
+        tag:"Critical",tagColor:"#7c6af7",tagBg:"rgba(124,106,247,0.12)",
+        difficulty:"Beginner",diffColor:"#00e5a0",
+        items:["L4 vs L7 load balancers — routing differences","Algorithms: round robin, least connections, IP hash, weighted","Health checks, failover, and high availability","Sticky sessions and their tradeoffs"]
+      },
+      {
+        icon:"⚡",iconBg:"rgba(255,179,64,0.15)",name:"Caching In-Depth",
+        tag:"Critical",tagColor:"#ffb340",tagBg:"rgba(255,179,64,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Cache-aside, write-through, write-back patterns","TTL and LRU eviction policy","Redis deep dive — data structures, persistence, clustering","Cache stampede & thundering herd problem","CDN caching at the edge"]
+      },
+      {
+        icon:"🗄️",iconBg:"rgba(0,212,200,0.15)",name:"DB Scaling",
+        tag:"Critical",tagColor:"#00d4c8",tagBg:"rgba(0,212,200,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Read replicas and primary-replica replication","Sharding strategies — range, hash, directory-based","Hot spots, resharding, and cross-shard queries","Connection pooling at scale with PgBouncer/ProxySQL"]
+      }
+    ]
+  },
+  {
+    id:"phase-3",
+    num:"Phase 03",
+    title:"Distributed Systems Core",
+    subtitle:"The theory that makes everything click",
+    count:"14 topics",
+    color:"#ff5e7d",
+    topics:[
+      {
+        icon:"🔄",iconBg:"rgba(255,94,125,0.15)",name:"CAP & Consistency",
+        tag:"Advanced",tagColor:"#ff5e7d",tagBg:"rgba(255,94,125,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["CAP theorem — CP vs AP in practice (P is always required)","PACELC theorem — extends CAP with latency dimension","Strong consistency vs eventual consistency","Linearizability — the gold standard of consistency"]
+      },
+      {
+        icon:"⚙️",iconBg:"rgba(124,106,247,0.15)",name:"Consistent Hashing",
+        tag:"Core",tagColor:"#a594ff",tagBg:"rgba(124,106,247,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Hash ring concept and why naive hashing fails","Virtual nodes for even data distribution","Real-world use in Cassandra, DynamoDB, Memcached","How to handle node addition and removal"]
+      },
+      {
+        icon:"📨",iconBg:"rgba(255,179,64,0.15)",name:"Message Queues & Streaming",
+        tag:"Critical",tagColor:"#ffb340",tagBg:"rgba(255,179,64,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Pub/Sub vs point-to-point queue models","Kafka deep dive — topics, partitions, consumer groups, offsets","At-least-once vs exactly-once delivery semantics","Dead letter queues and backpressure handling"]
+      },
+      {
+        icon:"🏛️",iconBg:"rgba(0,212,200,0.15)",name:"Distributed Coordination",
+        tag:"Advanced",tagColor:"#00d4c8",tagBg:"rgba(0,212,200,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Leader election algorithms and why they matter","Distributed locks — the Redlock algorithm","Consensus: Raft and Paxos at a conceptual level","Zookeeper and etcd — what they're actually used for"]
+      }
+    ]
+  },
+  {
+    id:"phase-4",
+    num:"Phase 04",
+    title:"Architecture Patterns",
+    subtitle:"Building systems that teams can actually work in",
+    count:"18 topics",
+    color:"#4db8ff",
+    topics:[
+      {
+        icon:"🔑",iconBg:"rgba(77,184,255,0.15)",name:"API Design",
+        tag:"Core",tagColor:"#4db8ff",tagBg:"rgba(77,184,255,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["RESTful API best practices and common mistakes","API versioning strategies (URI, header, query param)","Pagination — cursor-based vs offset-based","Idempotency keys for safe retries","Rate limiting algorithms in practice"]
+      },
+      {
+        icon:"🏗️",iconBg:"rgba(124,106,247,0.15)",name:"Microservices",
+        tag:"Core",tagColor:"#a594ff",tagBg:"rgba(124,106,247,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Service decomposition by domain and team boundaries","Service discovery — client-side vs server-side","Circuit breaker, retry, and timeout patterns","Saga pattern for distributed transactions","BFF, Sidecar, and service mesh patterns"]
+      },
+      {
+        icon:"⚡",iconBg:"rgba(255,94,125,0.15)",name:"Event-Driven Architecture",
+        tag:"Core",tagColor:"#ff5e7d",tagBg:"rgba(255,94,125,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Event sourcing — storing events instead of state","CQRS — separating read and write models","Outbox pattern for guaranteed message delivery","Choreography vs Orchestration tradeoffs"]
+      },
+      {
+        icon:"🧱",iconBg:"rgba(0,229,160,0.15)",name:"Monolith Strategies",
+        tag:"Important",tagColor:"#00e5a0",tagBg:"rgba(0,229,160,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Modular monolith — clean internal boundaries","Strangler Fig pattern — safe migration to microservices","When NOT to use microservices (usually early stage)","Sam Newman's service boundary principles"]
+      }
+    ]
+  },
+  {
+    id:"phase-5",
+    num:"Phase 05",
+    title:"Storage Deep Dive",
+    subtitle:"Every database type and when to actually use it",
+    count:"12 topics",
+    color:"#ffb340",
+    topics:[
+      {
+        icon:"🔬",iconBg:"rgba(255,179,64,0.15)",name:"DB Internals",
+        tag:"Advanced",tagColor:"#ffb340",tagBg:"rgba(255,179,64,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["B-tree indexes — how they're structured and traversed","LSM tree — used in Cassandra, RocksDB, LevelDB","Write-Ahead Log (WAL) — crash safety and recovery","MVCC — Multi-Version Concurrency Control explained"]
+      },
+      {
+        icon:"🗂️",iconBg:"rgba(0,212,200,0.15)",name:"Database Types",
+        tag:"Critical",tagColor:"#00d4c8",tagBg:"rgba(0,212,200,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Relational — PostgreSQL, MySQL (when structured data matters)","Document — MongoDB (flexible schemas, nested data)","Wide-column — Cassandra, HBase (write-heavy, time-series)","Key-Value — Redis, DynamoDB (simple lookups, sessions)","Graph — Neo4j (relationship-heavy queries)","Time-series — InfluxDB, TimescaleDB (metrics, IoT)","Search — Elasticsearch (full-text, aggregations)"]
+      },
+      {
+        icon:"🪣",iconBg:"rgba(124,106,247,0.15)",name:"Object & Blob Storage",
+        tag:"Important",tagColor:"#a594ff",tagBg:"rgba(124,106,247,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["How S3/GCS works internally at a high level","Chunking large files for reliable uploads","Multipart upload and resumable transfer strategies","CDN + object storage integration patterns"]
+      }
+    ]
+  },
+  {
+    id:"phase-6",
+    num:"Phase 06",
+    title:"Specialized Systems",
+    subtitle:"Domain-specific knowledge for complex products",
+    count:"12 topics",
+    color:"#00d4c8",
+    topics:[
+      {
+        icon:"🔍",iconBg:"rgba(0,212,200,0.15)",name:"Search Systems",
+        tag:"Specialized",tagColor:"#00d4c8",tagBg:"rgba(0,212,200,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Inverted index — how Elasticsearch indexes documents","Full-text search vs vector/semantic search","Relevance scoring — TF-IDF and BM25 algorithms","Sharding and replication in Elasticsearch clusters"]
+      },
+      {
+        icon:"📡",iconBg:"rgba(255,94,125,0.15)",name:"Real-Time Systems",
+        tag:"Specialized",tagColor:"#ff5e7d",tagBg:"rgba(255,94,125,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Stream processing — Kafka Streams and Apache Flink","WebSockets at scale — connection management","Server-Sent Events (SSE) vs WebSocket tradeoffs","Presence systems — who's online, last-seen timestamps"]
+      },
+      {
+        icon:"🔔",iconBg:"rgba(255,179,64,0.15)",name:"Notification Systems",
+        tag:"Specialized",tagColor:"#ffb340",tagBg:"rgba(255,179,64,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Push notifications — APNs (iOS) and FCM (Android)","Email delivery at scale — SMTP, deliverability, SPF/DKIM","Fan-out on write vs fan-out on read (news feed)","Handling notification preferences and unsubscribes"]
+      },
+      {
+        icon:"🎬",iconBg:"rgba(124,106,247,0.15)",name:"Media Systems",
+        tag:"Specialized",tagColor:"#a594ff",tagBg:"rgba(124,106,247,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Video streaming — HLS, DASH, adaptive bitrate","Transcoding pipelines and codec choices","Image processing — resizing, format conversion, lazy loading","CDN + object storage architecture for media"]
+      }
+    ]
+  },
+  {
+    id:"phase-7",
+    num:"Phase 07",
+    title:"Reliability & Operations",
+    subtitle:"Building systems that survive the real world",
+    count:"16 topics",
+    color:"#a594ff",
+    topics:[
+      {
+        icon:"🛡️",iconBg:"rgba(165,148,255,0.15)",name:"Fault Tolerance",
+        tag:"Critical",tagColor:"#a594ff",tagBg:"rgba(165,148,255,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["Retry logic with exponential backoff and jitter","Circuit breaker pattern — fail fast, recover gracefully","Bulkhead pattern — isolate failures between services","Timeout strategies and cascading failure prevention","Graceful degradation — serving reduced functionality"]
+      },
+      {
+        icon:"📊",iconBg:"rgba(0,229,160,0.15)",name:"Observability",
+        tag:"Critical",tagColor:"#00e5a0",tagBg:"rgba(0,229,160,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["The 3 pillars — Logs, Metrics, and Distributed Traces","OpenTelemetry, Jaeger, Datadog, and Grafana","SLI, SLO, SLA — defining and measuring reliability","Alerting strategies — avoiding alert fatigue"]
+      },
+      {
+        icon:"🔗",iconBg:"rgba(77,184,255,0.15)",name:"Data Consistency",
+        tag:"Advanced",tagColor:"#4db8ff",tagBg:"rgba(77,184,255,0.12)",
+        difficulty:"Advanced",diffColor:"#ff5e7d",
+        items:["Two-phase commit (2PC) — when and why it hurts","Saga pattern — compensating transactions at scale","Idempotency — making operations safe to retry","Dealing with partial failures in distributed writes"]
+      },
+      {
+        icon:"🔄",iconBg:"rgba(255,94,125,0.15)",name:"Disaster Recovery",
+        tag:"Critical",tagColor:"#ff5e7d",tagBg:"rgba(255,94,125,0.12)",
+        difficulty:"Intermediate",diffColor:"#4db8ff",
+        items:["RPO vs RTO — recovery point and time objectives","Backup strategies — full, incremental, differential","Multi-region architecture and data sovereignty","Active-active vs active-passive failover tradeoffs"]
+      }
+    ]
+  }
+];
+
+const numbers = [
+  {label:"L1 cache read",val:"~1 ns",color:"#00e5a0"},
+  {label:"L2 cache read",val:"~4 ns",color:"#00e5a0"},
+  {label:"RAM read",val:"~100 ns",color:"#4db8ff"},
+  {label:"SSD random read",val:"~100 µs",color:"#ffb340"},
+  {label:"HDD seek + read",val:"~10 ms",color:"#ff5e7d"},
+  {label:"Same DC round-trip",val:"~500 µs",color:"#a594ff"},
+  {label:"Cross-continent RTT",val:"~150 ms",color:"#ff8c42"},
+  {label:"Redis GET",val:"~0.5 ms",color:"#00d4c8"},
+];
+
+const practice = [
+  {
+    level:"Beginner",color:"#00e5a0",
+    problems:[
+      {icon:"🔗",name:"URL Shortener (TinyURL)"},
+      {icon:"📋",name:"Pastebin Service"},
+      {icon:"⏱",name:"Rate Limiter"},
+      {icon:"💾",name:"Key-Value Store"},
+      {icon:"📁",name:"File Upload Service"},
+    ]
+  },
+  {
+    level:"Intermediate",color:"#4db8ff",
+    problems:[
+      {icon:"🐦",name:"Twitter / News Feed"},
+      {icon:"💬",name:"WhatsApp / Chat System"},
+      {icon:"📸",name:"Instagram / Photo Sharing"},
+      {icon:"🔔",name:"Notification System"},
+      {icon:"🕷",name:"Web Crawler"},
+      {icon:"🔍",name:"Typeahead Search"},
+    ]
+  },
+  {
+    level:"Advanced",color:"#ff5e7d",
+    problems:[
+      {icon:"🎬",name:"YouTube / Video Streaming"},
+      {icon:"🚗",name:"Uber / Ride-Sharing"},
+      {icon:"📄",name:"Google Docs (collaborative editing)"},
+      {icon:"⚡",name:"Distributed Cache (Redis clone)"},
+      {icon:"📨",name:"Distributed Message Queue"},
+      {icon:"🔎",name:"Google Search (crawl + index + rank)"},
+      {icon:"🏦",name:"Payment Processing System"},
+    ]
+  }
+];
+
+const resources = [
+  {
+    emoji:"📘",
+    title:"Designing Data-Intensive Applications",
+    desc:"Martin Kleppmann's masterpiece. Covers databases, distributed systems, consistency, and reliability at depth. The bible of the field.",
+    type:"Book",
+    accent:"linear-gradient(90deg,#7c6af7,#4db8ff)"
+  },
+  {
+    emoji:"📗",
+    title:"System Design Interview Vol 1 & 2",
+    desc:"Alex Xu's interview-focused series. Practical walkthroughs of 30+ classic design problems with clear diagrams and estimations.",
+    type:"Book",
+    accent:"linear-gradient(90deg,#00e5a0,#00d4c8)"
+  },
+  {
+    emoji:"🎥",
+    title:"ByteByteGo",
+    desc:"Alex Xu's YouTube channel and newsletter. The best visual explanations of system design concepts on the internet. Start here.",
+    type:"YouTube / Newsletter",
+    accent:"linear-gradient(90deg,#ffb340,#ff5e7d)"
+  },
+  {
+    emoji:"🌐",
+    title:"High Scalability Blog",
+    desc:"Real architecture case studies from companies like Netflix, Airbnb, Uber. Learn what actually works in production at scale.",
+    type:"Blog",
+    accent:"linear-gradient(90deg,#4db8ff,#a594ff)"
+  },
+  {
+    emoji:"☁️",
+    title:"AWS / GCP Architecture Docs",
+    desc:"Official documentation and architecture patterns from cloud providers. Hands-on and up-to-date with actual production services.",
+    type:"Documentation",
+    accent:"linear-gradient(90deg,#ff8c42,#ffb340)"
+  }
+];
+
+/* ═══════════════════════════════════════════
+   RENDER PHASES
+═══════════════════════════════════════════ */
+const container = document.getElementById('phases-container');
+
+phases.forEach(phase => {
+  const section = document.createElement('section');
+  section.id = phase.id;
+
+  // Phase header
+  const header = document.createElement('div');
+  header.className = 'phase-header';
+  header.innerHTML = `
+    <span class="phase-num">${phase.num}</span>
+    <div class="phase-title-text">${phase.title}</div>
+    <div class="phase-line"></div>
+    <span class="phase-count">${phase.count}</span>
+  `;
+  section.appendChild(header);
+
+  // Topic grid
+  const grid = document.createElement('div');
+  grid.className = 'topic-grid';
+
+  phase.topics.forEach(topic => {
+    const card = document.createElement('div');
+    card.className = 'topic-card';
+
+    const topLine = document.createElement('div');
+    topLine.className = 'topic-card-top';
+    topLine.style.background = `linear-gradient(90deg, ${phase.color}, ${topic.tagColor})`;
+    card.appendChild(topLine);
+
+    const items = topic.items.map(i => `<li>${i}</li>`).join('');
+
+    card.innerHTML += `
+      <div class="topic-card-inner">
+        <div class="topic-card-head">
+          <div class="topic-icon" style="background:${topic.iconBg}">${topic.icon}</div>
+          <div class="topic-name">${topic.name}</div>
+          <span class="topic-tag" style="color:${topic.tagColor};border-color:${topic.tagColor}33;background:${topic.tagBg}">${topic.tag}</span>
+        </div>
+        <ul class="topic-items">${items}</ul>
+      </div>
+      <div class="topic-card-foot">
+        <span class="foot-count">${topic.items.length} topics</span>
+        <span class="foot-difficulty" style="color:${topic.diffColor}">${topic.difficulty}</span>
+      </div>
+      <span class="click-hint">click to expand ↗</span>
+    `;
+
+    // attach modal data & click
+    const modalData = {
+      phaseNum:   phase.num,
+      phaseName:  phase.title,
+      phaseColor: phase.color,
+      icon:       topic.icon,
+      iconBg:     topic.iconBg,
+      name:       topic.name,
+      tagline:    topic.tagline || '',
+      tag:        topic.tag,
+      tagColor:   topic.tagColor,
+      tagBg:      topic.tagBg,
+      difficulty: topic.difficulty,
+      diffColor:  topic.diffColor,
+      items:      topic.items,
+    };
+    card.addEventListener('click', () => openModal(modalData));
+
+    grid.appendChild(card);
+  });
+
+  section.appendChild(grid);
+  container.appendChild(section);
+});
+
+/* ═══════════════════════════════════════════
+   RENDER NUMBERS
+═══════════════════════════════════════════ */
+const numGrid = document.getElementById('numbers-grid');
+numbers.forEach(n => {
+  const row = document.createElement('div');
+  row.className = 'number-row';
+  row.innerHTML = `<span class="number-label">${n.label}</span><span class="number-val" style="color:${n.color}">${n.val}</span>`;
+  numGrid.appendChild(row);
+});
+
+/* ═══════════════════════════════════════════
+   RENDER PRACTICE
+═══════════════════════════════════════════ */
+const practiceGrid = document.getElementById('practice-grid');
+practice.forEach(col => {
+  const div = document.createElement('div');
+  div.className = 'practice-col';
+
+  const items = col.problems.map(p =>
+    `<div class="practice-item"><span class="practice-item-icon">${p.icon}</span><span>${p.name}</span></div>`
+  ).join('');
+
+  div.innerHTML = `
+    <div class="practice-col-head">
+      <span class="practice-level-dot" style="background:${col.color}"></span>
+      <span class="practice-col-title">${col.level}</span>
+    </div>
+    <div class="practice-col-body">${items}</div>
+  `;
+  practiceGrid.appendChild(div);
+});
+
+/* ═══════════════════════════════════════════
+   RENDER RESOURCES
+═══════════════════════════════════════════ */
+const resGrid = document.getElementById('resources-grid');
+resources.forEach(r => {
+  const card = document.createElement('div');
+  card.className = 'resource-card';
+  card.style.setProperty('--rc-accent', r.accent);
+  card.innerHTML = `
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:${r.accent};border-radius:var(--radius-lg) var(--radius-lg) 0 0"></div>
+    <span class="resource-emoji">${r.emoji}</span>
+    <div class="resource-title">${r.title}</div>
+    <div class="resource-desc">${r.desc}</div>
+    <span class="resource-type">${r.type}</span>
+  `;
+  resGrid.appendChild(card);
+});
+
+/* ═══════════════════════════════════════════
+   THEME TOGGLE
+═══════════════════════════════════════════ */
+const html       = document.documentElement;
+const themeBtn   = document.getElementById('theme-toggle');
+const themeIcon  = document.getElementById('theme-icon');
+const themeLabel = document.getElementById('theme-label');
+
+// Read saved preference or system preference
+const saved = localStorage.getItem('sdmap-theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+let isLight = saved ? saved === 'light' : !prefersDark;
+
+function applyTheme(light) {
+  isLight = light;
+  if (light) {
+    html.classList.add('light');
+    themeIcon.textContent  = '🌙';
+    themeLabel.textContent = 'Dark';
+  } else {
+    html.classList.remove('light');
+    themeIcon.textContent  = '☀️';
+    themeLabel.textContent = 'Light';
+  }
+  localStorage.setItem('sdmap-theme', light ? 'light' : 'dark');
+}
+
+applyTheme(isLight);
+themeBtn.addEventListener('click', () => applyTheme(!isLight));
+
+/* ═══════════════════════════════════════════
+   SCROLL EFFECTS
+═══════════════════════════════════════════ */
+// Progress bar
+window.addEventListener('scroll', () => {
+  const st = window.scrollY;
+  const dh = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (dh ? (st/dh)*100 : 0) + '%';
+  const btn = document.getElementById('back-top');
+  st > 500 ? btn.classList.add('show') : btn.classList.remove('show');
+}, {passive:true});
+
+// Intersection observer - card reveals
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      // stagger siblings
+      const siblings = e.target.parentElement.querySelectorAll('.topic-card');
+      siblings.forEach((s, idx) => {
+        setTimeout(() => s.classList.add('visible'), idx * 80);
+      });
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:0.05, rootMargin:'0px 0px -60px 0px'});
+
+document.querySelectorAll('.topic-grid').forEach(grid => {
+  const first = grid.querySelector('.topic-card');
+  if (first) io.observe(first);
+});
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+const overlay   = document.getElementById('modal-overlay');
+const modalBox  = document.getElementById('modal-box');
+
+function openModal(data) {
+  // populate accent bar
+  document.getElementById('modal-accent-bar').style.background =
+    `linear-gradient(90deg, ${data.phaseColor}, ${data.tagColor})`;
+
+  // icon
+  const iconWrap = document.getElementById('modal-icon-wrap');
+  iconWrap.style.background  = data.iconBg;
+  document.getElementById('modal-icon').textContent = data.icon;
+
+  // text
+  document.getElementById('modal-phase-label').textContent = data.phaseNum + ' · ' + data.phaseName;
+  document.getElementById('modal-title').textContent       = data.name;
+  document.getElementById('modal-tagline').textContent     = data.tagline || '';
+
+  // meta badges
+  const tagBadge  = document.getElementById('modal-tag-badge');
+  tagBadge.textContent   = data.tag;
+  tagBadge.style.color        = data.tagColor;
+  tagBadge.style.borderColor  = data.tagColor + '44';
+  tagBadge.style.background   = data.tagBg;
+
+  const diffBadge = document.getElementById('modal-difficulty-badge');
+  diffBadge.textContent  = data.difficulty;
+  diffBadge.style.color       = data.diffColor;
+  diffBadge.style.borderColor = data.diffColor + '44';
+  diffBadge.style.background  = data.diffColor + '14';
+
+  document.getElementById('modal-count-badge').textContent = data.items.length + ' topics';
+
+  // items list
+  const list = document.getElementById('modal-items-list');
+  list.innerHTML = data.items.map((item, i) =>
+    `<li>
+      <span class="modal-item-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="modal-item-arrow" style="color:${data.tagColor}">→</span>
+      <span>${item}</span>
+    </li>`
+  ).join('');
+
+  // open
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('modal-close').focus(), 50);
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
